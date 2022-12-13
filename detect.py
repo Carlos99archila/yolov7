@@ -56,9 +56,9 @@ def detect(save_img=False):
     else:
         dataset = LoadImages(source, img_size=imgsz, stride=stride)
 
-    # Get names and colors
+    # Get names and colors #colors = [(0, 255, 0) for _ in names]
     names = model.module.names if hasattr(model, 'module') else model.names
-    colors = [(0, 255, 0) for _ in names]
+    colors = [(0, 250, 0) for _ in names]
 
     # Run inference
     if device.type != 'cpu':
