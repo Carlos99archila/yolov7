@@ -140,6 +140,7 @@ def detect(save_img=False):
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
+                    im0 = cv2.resize(im0, (224,224))
                     cv2.imwrite(save_path, im0)
                     print(f" The image with the result is saved in: {save_path}")
                 else:  # 'video' or 'stream'
