@@ -59,6 +59,7 @@ def detect(save_img=False):
     # Get names and colors #colors = [(0, 255, 0) for _ in names]
     names = model.module.names if hasattr(model, 'module') else model.names
     colors = [(0, 250, 0) for _ in names]
+    colors2 = [(0, 0, 0) for _ in names]
 
     # Run inference
     if device.type != 'cpu':
@@ -128,6 +129,7 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         #plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
                         plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
+                        plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=1000)
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
