@@ -130,7 +130,7 @@ def detect(save_img=False):
                         #plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
                         #plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
                         img1 = str(save_img)
-                        if save_img == img1:
+                        if str(save_img) == img1:
                             plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=2500)
                             img1 = ' '
                         plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
