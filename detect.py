@@ -118,6 +118,7 @@ def detect(save_img=False):
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
 
                 # Write results
+                img1 = str(save_img)
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
@@ -129,7 +130,6 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         #plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
                         #plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
-                        img1 = str(save_img)
                         if str(save_img) == img1:
                             plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=2500)
                             img1 = ' '
