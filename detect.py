@@ -68,7 +68,7 @@ def detect(save_img=False):
     old_img_b = 1
 
     #@@@@@@ TESIS @@@@@@@@
-    While True:
+    while True:
         t0 = time.time()
         for path, img, im0s, vid_cap in dataset:
             img = torch.from_numpy(img).to(device)
