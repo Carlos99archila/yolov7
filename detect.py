@@ -68,6 +68,14 @@ def detect(save_img=False):
     old_img_b = 1
 
     #@@@@@@ TESIS @@@@@@@@
+    import os
+    import time 
+    import cv2
+    camera = cv2.VideoCapture(0)
+    return_value, image = camera.read()
+    cv2.imwrite('/TESIS/imagetesis.png',image)
+    del(camera)    
+    
     while True:
         t0 = time.time()
         for path, img, im0s, vid_cap in dataset:
@@ -171,6 +179,11 @@ def detect(save_img=False):
             #print(f"Results saved to {save_dir}{s}")
 
         print(f'Done. ({time.time() - t0:.3f}s)')
+        
+        camera = cv2.VideoCapture(0)
+        return_value, image = camera.read()
+        cv2.imwrite('/TESIS/imagetesis.png',image)
+        del(camera)
 
 
 if __name__ == '__main__':
