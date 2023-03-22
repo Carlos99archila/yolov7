@@ -68,7 +68,7 @@ def detect(save_img=False):
     old_img_b = 1
 
     #@@@@@@ TESIS @@@@@@@@
-    '''
+    
     import os
     import time 
     import cv2
@@ -77,7 +77,20 @@ def detect(save_img=False):
     cv2.imwrite('/TESIS/imagetesis.png',image)
     del(camera)    
     
+    import tensorflow.keras
+    import tensorflow_hub as hub 
+    import numpy as np
+    from PIL import Image
+    
+    modelo =  tensorflow.keras.models.load_model(
+        ('/home/pi1/Final_Model.h5'),
+        custom_objetcs={'KerasLayer':hub.KerasLayer})
+    
+    modelo.summary()
+    
+    #Proceso infinito
     while True:
+        
         t0 = time.time()
         for path, img, im0s, vid_cap in dataset:
             img = torch.from_numpy(img).to(device)
@@ -185,6 +198,15 @@ def detect(save_img=False):
         return_value, image = camera.read()
         cv2.imwrite('/TESIS/imagetesis.png',image)
         del(camera)
+        
+        imgf = Image.open('/TESIS/imagetesis.png')
+        imgf = np.array(imgf).astype(float)/255
+        imgf = cv2.resize(imgf,(224,224))
+        prediccion = modelo.predict(img.reshape(-1,224,224,3))
+        salida = np.argmax(prediccion[0], axis=-1)
+        print(salida)
+        
+        
         '''
     t0 = time.time()
     for path, img, im0s, vid_cap in dataset:
@@ -288,7 +310,7 @@ def detect(save_img=False):
         #print(f"Results saved to {save_dir}{s}")
 
     print(f'Done. ({time.time() - t0:.3f}s)')
-
+    '''
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
