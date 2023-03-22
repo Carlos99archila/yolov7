@@ -194,17 +194,19 @@ def detect(save_img=False):
 
         print(f'Done. ({time.time() - t0:.3f}s)')
         
-        camera = cv2.VideoCapture(0)
-        return_value, image = camera.read()
-        cv2.imwrite('/TESIS/imagetesis.png',image)
-        del(camera)
-        
+        #prediccion
         imgf = Image.open('/TESIS/imagetesis.png')
         imgf = np.array(imgf).astype(float)/255
         imgf = cv2.resize(imgf,(224,224))
         prediccion = modelo.predict(img.reshape(-1,224,224,3))
         salida = np.argmax(prediccion[0], axis=-1)
         print(salida)
+        
+        #tomar foto
+        camera = cv2.VideoCapture(0)
+        return_value, image = camera.read()
+        cv2.imwrite('/TESIS/imagetesis.png',image)
+        del(camera)
         
         
         '''
