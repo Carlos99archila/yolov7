@@ -72,21 +72,22 @@ def detect(save_img=False):
     import os
     import time 
     import cv2
-    camera = cv2.VideoCapture(0)
-    return_value, image = camera.read()
-    cv2.imwrite('/TESIS/imagetesis.png',image)
-    del(camera)    
+    #camera = cv2.VideoCapture(0)
+    #return_value, image = camera.read()
+    #cv2.imwrite('/TESIS/imagetesis.png',image)
+    #del(camera)    
     
     import tensorflow.keras
     import tensorflow_hub as hub 
     import numpy as np
     from PIL import Image
-    
+    '''
     modelo =  tensorflow.keras.models.load_model(
         ('/home/pi1/Final_Model.h5'),
         custom_objetcs={'KerasLayer':hub.KerasLayer})
     
     modelo.summary()
+    '''
     '''
     #Proceso infinito
     while True:
@@ -261,7 +262,7 @@ def detect(save_img=False):
 
                 # Write results
                 img1 = str(save_img)
-                im0 = np.zeros((old_img_h,old_img_w,3),np.uint8)
+                #im0 = np.zeros((old_img_h,old_img_w,3),np.uint8)
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
