@@ -145,7 +145,6 @@ def detect(save_img=False):
 
                     # Write results
                     img1 = str(save_img)
-                    im0 = imagenfondo
                     for *xyxy, conf, cls in reversed(det):
                         if save_txt:  # Write to file
                             xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
@@ -160,7 +159,7 @@ def detect(save_img=False):
                             #if str(save_img) == img1:
                                 #plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=620)
                                 #img1 = ' '
-                            plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
+                            plot_one_box(xyxy, imagenfondo, color=colors[int(cls)], line_thickness=-1)
 
                 # Print time (inference + NMS)
                 print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
