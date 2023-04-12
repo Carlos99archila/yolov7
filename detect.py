@@ -81,6 +81,9 @@ def detect(save_img=False):
     import tensorflow_hub as hub 
     import numpy as np
     from PIL import Image
+    
+    
+    
     '''
     modelo =  tensorflow.keras.models.load_model(
         ('/home/pi1/Final_Model.h5'),
@@ -259,10 +262,11 @@ def detect(save_img=False):
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+                    if c == ###
 
                 # Write results
                 img1 = str(save_img)
-                im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8)
+                im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
                 print(im0.shape[0])
                 print(im0.shape[1])
                 for *xyxy, conf, cls in reversed(det):
