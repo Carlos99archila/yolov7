@@ -68,7 +68,7 @@ def detect(save_img=False):
     old_img_b = 1
 
     #@@@@@@ TESIS @@@@@@@@
-    '''
+    
     import os
     import time 
     import cv2
@@ -87,7 +87,7 @@ def detect(save_img=False):
         custom_objetcs={'KerasLayer':hub.KerasLayer})
     
     modelo.summary()
-    
+    '''
     #Proceso infinito
     while True:
         
