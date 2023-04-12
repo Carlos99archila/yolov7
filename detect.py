@@ -262,7 +262,7 @@ def detect(save_img=False):
 
                 # Write results
                 img1 = str(save_img)
-                im0 = np.zeros((img.shape[0],img.shape[1],3),np.uint8)
+                img1 = np.zeros((img.shape[0],img.shape[1],3),np.uint8)
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
