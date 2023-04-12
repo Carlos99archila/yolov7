@@ -82,8 +82,6 @@ def detect(save_img=False):
     import numpy as np
     from PIL import Image
     
-    imagenfondo = np.zeros((480,640,3),np.uint8)
-    
     modelo =  tensorflow.keras.models.load_model(
         ('/home/pi1/Final_Model.h5'),
         custom_objetcs={'KerasLayer':hub.KerasLayer})
@@ -159,7 +157,7 @@ def detect(save_img=False):
                             #if str(save_img) == img1:
                                 #plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=620)
                                 #img1 = ' '
-                            plot_one_box(xyxy, imagenfondo, color=colors[int(cls)], line_thickness=-1)
+                            plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
 
                 # Print time (inference + NMS)
                 print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
