@@ -68,7 +68,7 @@ def detect(save_img=False):
     old_img_b = 1
 
     #@@@@@@ TESIS @@@@@@@@
-    
+    '''
     import os
     import time 
     import cv2
@@ -261,6 +261,7 @@ def detect(save_img=False):
 
                 # Write results
                 img1 = str(save_img)
+                im0 = imagenfondo = np.zeros((old_img_h,old_img_w,3),np.uint8)
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
@@ -272,9 +273,9 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         #plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
                         #plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
-                        if str(save_img) == img1:
-                            plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=620)
-                            img1 = ' '
+                        #if str(save_img) == img1:
+                            #plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=620)
+                            #img1 = ' '
                         plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
 
             # Print time (inference + NMS)
@@ -311,7 +312,7 @@ def detect(save_img=False):
         #print(f"Results saved to {save_dir}{s}")
 
     print(f'Done. ({time.time() - t0:.3f}s)')
-    '''
+    #'''
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
