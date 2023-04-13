@@ -287,6 +287,9 @@ def detect(save_img=False):
 
             # Save results (image with detections)
             if save_img:
+                if s == '':
+                    im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
+                    cv2.imwrite(save_path, im0)
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
                     print(f" The image with the result is saved in: {save_path}")
