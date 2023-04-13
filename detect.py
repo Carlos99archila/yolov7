@@ -262,6 +262,8 @@ def detect(save_img=False):
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+                    global c
+                    global n
                     
                 # Write results
                 img1 = str(save_img)
