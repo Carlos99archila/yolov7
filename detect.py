@@ -288,8 +288,6 @@ def detect(save_img=False):
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
-                    if c == 0 and n == 0: #### imagen negra con 0 personas ####
-                        im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
                     cv2.imwrite(save_path, im0)
                     print(f" The image with the result is saved in: {save_path}")
                 else:  # 'video' or 'stream'
