@@ -246,10 +246,6 @@ def detect(save_img=False):
         # Process detections
         for i, det in enumerate(pred):  # detections per image
             print(pred)
-            print(pred[0])
-            print(pred[1])
-            print(pred[2])
-            print(pred[3])
             if webcam:  # batch_size >= 1
                 p, s, im0, frame = path[i], '%g: ' % i, im0s[i].copy(), dataset.count
             else:
