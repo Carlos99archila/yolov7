@@ -264,6 +264,7 @@ def detect(save_img=False):
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
                     if c == 0 and n == 0: #### imagen negra con 0 personas ####
                         im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
+                        cv2.imwrite(save_path, im0)
 
                 # Write results
                 img1 = str(save_img)
