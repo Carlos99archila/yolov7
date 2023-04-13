@@ -262,10 +262,7 @@ def detect(save_img=False):
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-                    if c == 0 and n == 0: #### imagen negra con 0 personas ####
-                        im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
-                        cv2.imwrite(save_path, im0)
-
+                    
                 # Write results
                 img1 = str(save_img)
                 im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
@@ -298,7 +295,8 @@ def detect(save_img=False):
             # Save results (image with detections)
             if save_img:
                 if dataset.mode == 'image':
-                    ######im0 = cv2.resize(im0, (224,224))
+                    if c == 0 and n == 0: #### imagen negra con 0 personas ####
+                        im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
                     cv2.imwrite(save_path, im0)
                     print(f" The image with the result is saved in: {save_path}")
                 else:  # 'video' or 'stream'
