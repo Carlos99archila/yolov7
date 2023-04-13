@@ -82,12 +82,6 @@ def detect(save_img=False):
     import numpy as np
     from PIL import Image
     
-    imgfiltro = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
-    for i in range(120,480):                  
-        imgfiltro[i,range(213,439)] = (1,1,1)
-    
-    
-    
     '''
     modelo =  tensorflow.keras.models.load_model(
         ('/home/pi1/Final_Model.h5'),
@@ -269,6 +263,9 @@ def detect(save_img=False):
                     
                 # Write results
                 im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
+                imgfiltro = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra filtro####
+                for ifiltro in range(120,480):                  
+                    imgfiltro[ifiltro,range(213,439)] = (1,1,1)
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
@@ -279,6 +276,7 @@ def detect(save_img=False):
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
                         plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
+                im0 *= imgfiltro
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
@@ -294,7 +292,6 @@ def detect(save_img=False):
                     im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
                     cv2.imwrite(save_path, im0)
                 if dataset.mode == 'image':
-                    im0 *= imgfiltro
                     cv2.imwrite(save_path, im0)
                     print(f" The image with the result is saved in: {save_path}")
                 else:  # 'video' or 'stream'
