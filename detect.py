@@ -262,7 +262,8 @@ def detect(save_img=False):
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-                    if c == ###
+                    if c == 0 and n == 0: #### imagen negra con 0 personas ####
+                        im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
 
                 # Write results
                 img1 = str(save_img)
