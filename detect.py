@@ -82,6 +82,10 @@ def detect(save_img=False):
     import numpy as np
     from PIL import Image
     
+    imgfiltro = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
+    for i in range(120,480):                  
+        imgfiltro[i,range(213,439)] = (1,1,1)
+    
     
     
     '''
@@ -290,6 +294,7 @@ def detect(save_img=False):
                     im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
                     cv2.imwrite(save_path, im0)
                 if dataset.mode == 'image':
+                    im0 *= imgfiltro
                     cv2.imwrite(save_path, im0)
                     print(f" The image with the result is saved in: {save_path}")
                 else:  # 'video' or 'stream'
