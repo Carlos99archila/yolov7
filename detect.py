@@ -59,7 +59,7 @@ def detect(save_img=False):
     # Get names and colors #colors = [(0, 255, 0) for _ in names]
     names = model.module.names if hasattr(model, 'module') else model.names
     colors = [(0, 255, 0) for _ in names]
-    colors2 = [(0, 0, 0) for _ in names]
+    #colors2 = [(0, 0, 0) for _ in names]
 
     # Run inference
     if device.type != 'cpu':
@@ -245,6 +245,11 @@ def detect(save_img=False):
 
         # Process detections
         for i, det in enumerate(pred):  # detections per image
+            print(pred)
+            print(pred[0])
+            print(pred[1])
+            print(pred[2])
+            print(pred[3])
             if webcam:  # batch_size >= 1
                 p, s, im0, frame = path[i], '%g: ' % i, im0s[i].copy(), dataset.count
             else:
@@ -262,14 +267,9 @@ def detect(save_img=False):
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
-                    global c
-                    global n
                     
                 # Write results
-                img1 = str(save_img)
                 im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
-                print(im0.shape[0])
-                print(im0.shape[1])
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
@@ -279,11 +279,6 @@ def detect(save_img=False):
 
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
-                        #plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
-                        #plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
-                        #if str(save_img) == img1:
-                            #plot_one_box(xyxy, im0, color=colors2[int(cls)], line_thickness=620)
-                            #img1 = ' '
                         plot_one_box(xyxy, im0, color=colors[int(cls)], line_thickness=-1)
 
             # Print time (inference + NMS)
