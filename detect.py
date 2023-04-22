@@ -265,7 +265,7 @@ def detect(save_img=False):
                 im0 = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra####
                 imgfiltro = np.zeros((im0.shape[0],im0.shape[1],3),np.uint8) ####Imagen negra filtro####
                 for ifiltro in range(120,480):                  
-                    imgfiltro[ifiltro,range(213,439)] = (1,1,1)
+                    imgfiltro[ifiltro,range(213,426)] = (1,1,1)
                 for *xyxy, conf, cls in reversed(det):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
